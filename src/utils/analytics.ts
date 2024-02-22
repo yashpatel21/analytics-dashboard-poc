@@ -24,8 +24,12 @@ export class Analytics {
       key += `::${getDate()}`
     }
 
+    console.log(key)
+    console.log(event)
+
     // db call to persist this event
-    await redis.hincrby(key, JSON.stringify(event), 1)
+    const res = await redis.hincrby(key, JSON.stringify(event), 1)
+    console.log(res)
     if (!opts?.persist) await redis.expire(key, this.retention)
   }
 
