@@ -43,8 +43,8 @@ export class Analytics {
 
     const data = fetched.sort((a, b) => {
       if (
-        parse(a.date, 'dd/MM/yyyy', new Date()) >
-        parse(b.date, 'dd/MM/yyyy', new Date())
+        parse(a.date, 'MM/dd/yyyy', new Date()) >
+        parse(b.date, 'MM/dd/yyyy', new Date())
       ) {
         return 1
       } else {
