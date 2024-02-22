@@ -1,22 +1,22 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { analytics } from './utils/analytics'
+import { NextResponse } from 'next/server'
 
-export default async function middleware(req: NextRequest) {
-  if (req.nextUrl.pathname === '/') {
-    try {
-      analytics.track('pageview', {
-        page: '/',
-        country: req.geo?.country,
-      })
-    } catch (err) {
-      // fail silently to not affect request
-      console.error(err)
-    }
-  }
+import type { NextRequest } from 'next/server'
 
-  return NextResponse.next()
+export function middleware(req: NextRequest) {
+
+    const url = req.nextUrl
+    const { pathname } = url
+
+    if (pathname.startsWith(`/api/`)) {
+        if (!req.headers.get("referer")?.includes(process.env.APP_URL as string)) {
+        return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+        }
+      }
+
+     return NextResponse.next()
+
 }
 
-export const matcher = {
-  matcher: ['/'],
+export const config = {
+  matcher: ['/((?!_next|fonts|examples|svg|[\\w-]+\\.\\w+).*)'],
 }

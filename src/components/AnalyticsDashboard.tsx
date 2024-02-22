@@ -8,6 +8,8 @@ import ReactCountryFlag from 'react-country-flag'
 interface AnalyticsDashboardProps {
 	avgVisitorsPerDay: string
 	amtVisitorsToday: number
+	avgLeadsPerDay: string
+	amtLeadsToday: number
 	timeseriesPageviews: Awaited<ReturnType<typeof analytics.retrieveDays>>
 	topCountries: [string, number][]
 }
@@ -37,12 +39,19 @@ const Badge = ({ percentage }: { percentage: number }) => {
 	)
 }
 
-const AnalyticsDashboard = ({ avgVisitorsPerDay, amtVisitorsToday, timeseriesPageviews, topCountries }: AnalyticsDashboardProps) => {
+const AnalyticsDashboard = ({
+	avgVisitorsPerDay,
+	amtVisitorsToday,
+	avgLeadsPerDay,
+	amtLeadsToday,
+	timeseriesPageviews,
+	topCountries,
+}: AnalyticsDashboardProps) => {
 	return (
 		<div className="flex flex-col gap-6">
-			<div className="grid w-full mx-auto grid-cols-1 sm:grid-cols-2 gap-6">
+			<div className="grid w-full mx-auto grid-cols-1 sm:grid-cols-4 gap-6">
 				<Card className="w-full">
-					<p className="text-tremor-default text-dark-tremor-content">Avg. visitors/day</p>
+					<p className="text-tremor-default text-dark-tremor-content">Avg. visitors/day (Past week)</p>
 					<p className="text-3xl text-dark-tremor-content-strong font-semibold">{avgVisitorsPerDay}</p>
 				</Card>
 				<Card className="w-full">
@@ -51,6 +60,17 @@ const AnalyticsDashboard = ({ avgVisitorsPerDay, amtVisitorsToday, timeseriesPag
 						<Badge percentage={(amtVisitorsToday / Number(avgVisitorsPerDay) - 1) * 100} />
 					</p>
 					<p className="text-3xl text-dark-tremor-content-strong font-semibold">{amtVisitorsToday}</p>
+				</Card>
+				<Card className="w-full">
+					<p className="text-tremor-default text-dark-tremor-content">Avg. Leads/day (Past week)</p>
+					<p className="text-3xl text-dark-tremor-content-strong font-semibold">{avgLeadsPerDay}</p>
+				</Card>
+				<Card className="w-full">
+					<p className="flex gap-2.5 items-center text-tremor-default text-dark-tremor-content">
+						Leads today
+						<Badge percentage={(amtLeadsToday / Number(avgLeadsPerDay) - 1) * 100} />
+					</p>
+					<p className="text-3xl text-dark-tremor-content-strong font-semibold">{amtLeadsToday}</p>
 				</Card>
 			</div>
 

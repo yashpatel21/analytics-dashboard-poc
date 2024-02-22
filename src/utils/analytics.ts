@@ -10,6 +10,11 @@ type TrackOptions = {
   persist?: boolean
 }
 
+type PageVisitEvent = {
+  date: string
+  event: object
+}
+
 export class Analytics {
   private retention: number = 60 * 60 * 24 * 7
 
@@ -17,19 +22,17 @@ export class Analytics {
     if (opts?.retention) this.retention = opts.retention
   }
 
-  async track(namespace: string, event: object = {}, opts?: TrackOptions) {
+  async track(namespace: string, analyticsData: PageVisitEvent, opts?: TrackOptions) {
+
+    const event = analyticsData.event
     let key = `analytics::${namespace}`
 
     if (!opts?.persist) {
-      key += `::${getDate()}`
+      key += `::${analyticsData.date}`
     }
-
-    console.log(key)
-    console.log(event)
 
     // db call to persist this event
     const res = await redis.hincrby(key, JSON.stringify(event), 1)
-    console.log(res)
     if (!opts?.persist) await redis.expire(key, this.retention)
   }
 
