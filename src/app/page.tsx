@@ -55,14 +55,14 @@ export default function Home() {
 							</h3>
 						</div>
 					</div>
-					<div className="w-full flex justify-center items-center grow-0 sm:px-8 md:px-1">
+					<div className="w-full flex justify-center items-center grow-0 sm:px-8 md:px-6 lg:px-4">
 						<div className="relative rounded-lg overflow-hidden">
 							<Link href="/analytics">
 								<div className="cursor-pointer absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500  from-indigo-300 z-0 opacity-20 hover:opacity-25 transition-opacity"></div>
 							</Link>
 							<Image
 								src="/analytics-demo.png"
-								width={865}
+								width={838}
 								height={450}
 								alt="showcase analytics dashboard"
 								quality={100}
