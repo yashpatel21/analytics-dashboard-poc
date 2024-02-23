@@ -4,14 +4,17 @@ Analytics Dashboard Demo
 
 <br>
 
+![alt text](/public/analytics-github.png 'showcase')
+
+<br>
+
 <div align="center">
+	<p>Built Using:</p>
 	<image src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
     <image src="https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white" alt="Redis"/>
 </div>
 
 <br>
-
-![alt text](/public/analytics-github.png 'Logo Title Text 1')
 
 <div align="center">
 	<p>Deployed at: <a href="https://analytics-dashboard-coral.vercel.app/">analytics-dashboard-coral.vercel.app</a></p>
